@@ -28,7 +28,7 @@ namespace Carseer.Project.BE.App.Controllers
             var types = await _vehicleService.GetVehicleTypesForMakeAsync(makeId);
             List<VehicleType>? makeResponses = types.Results?.ToList();
 
-            return Ok(types);
+            return Ok(makeResponses);
         }
 
     }
