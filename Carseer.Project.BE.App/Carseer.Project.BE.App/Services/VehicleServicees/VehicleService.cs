@@ -8,6 +8,7 @@ namespace Carseer.Project.BE.App.Services.VehicleServicees
     public class VehicleService : IVehicleService
     {
         private string GetAllMakes = "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json";
+        private string GetVehicleTypesForMakeById = "https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMakeId/{id}?format=json";
         private readonly HttpClient _httpClient;
         public VehicleService()
         {
@@ -35,9 +36,33 @@ namespace Carseer.Project.BE.App.Services.VehicleServicees
             {
                 throw ex;
             }
-
-
         }
+        public async Task<VehicleTypeResponse> GetVehicleTypesForMakeAsync(long makeId)
+        {
+            try
+            {
+                string GetVehicleTypesForMakeByIdApi = GetVehicleTypesForMakeById.Replace("{id}" ,makeId.ToString());
+                var result = await GetAsync(GetVehicleTypesForMakeByIdApi);
+                if (result != null)
+                {
+                    if (result.IsSuccessStatusCode && (int)result.StatusCode >= 200 && (int)result.StatusCode < 300)
+                    {
+                        var response = await result.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<VehicleTypeResponse>(response) ?? new();
+
+                    }
+                    throw new Exception();
+                }
+                throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
         private async Task<HttpResponseMessage> GetAsync(string api)
         {
             var httpResponseMessage = await _httpClient.GetAsync(api);
