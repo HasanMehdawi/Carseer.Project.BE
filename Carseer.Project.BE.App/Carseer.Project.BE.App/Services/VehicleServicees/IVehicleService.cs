@@ -7,5 +7,7 @@ namespace Carseer.Project.BE.App.Services.VehicleServicees
         Task<MakeResponse> GetMakesAsync();
 
         Task<VehicleTypeResponse> GetVehicleTypesForMakeAsync(long makeId);
+
+        Task<VehicleModelResponse> GetModelsForMakeYearAsync(long makeId, int year);
     }
 }

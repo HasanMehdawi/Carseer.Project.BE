@@ -9,6 +9,7 @@ namespace Carseer.Project.BE.App.Services.VehicleServicees
     {
         private string GetAllMakes = "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json";
         private string GetVehicleTypesForMakeById = "https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMakeId/{id}?format=json";
+        private string GetModelsForMakeIdAndACombinationOfYearAndVehicleType = "https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/{id}/modelyear/{year}?format=json";
         private readonly HttpClient _httpClient;
         public VehicleService()
         {
@@ -49,6 +50,30 @@ namespace Carseer.Project.BE.App.Services.VehicleServicees
                     {
                         var response = await result.Content.ReadAsStringAsync();
                         return JsonConvert.DeserializeObject<VehicleTypeResponse>(response) ?? new();
+
+                    }
+                    throw new Exception();
+                }
+                throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<VehicleModelResponse> GetModelsForMakeYearAsync(long makeId , int year)
+        {
+            try
+            {
+                string GetModelsForMakeIdAndACombinationOfYearAndVehicleTypeApi = GetModelsForMakeIdAndACombinationOfYearAndVehicleType.Replace("{id}" ,makeId.ToString())
+                    .Replace("{year}" ,year.ToString());
+                var result = await GetAsync(GetModelsForMakeIdAndACombinationOfYearAndVehicleTypeApi);
+                if (result != null)
+                {
+                    if (result.IsSuccessStatusCode && (int)result.StatusCode >= 200 && (int)result.StatusCode < 300)
+                    {
+                        var response = await result.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<VehicleModelResponse>(response) ?? new();
 
                     }
                     throw new Exception();

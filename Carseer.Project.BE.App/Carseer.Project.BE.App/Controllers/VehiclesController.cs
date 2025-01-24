@@ -31,5 +31,13 @@ namespace Carseer.Project.BE.App.Controllers
             return Ok(makeResponses);
         }
 
+        [HttpGet("makes/{makeId}/year/{year}/models")]
+        public async Task<ActionResult<List<VehicleModel>>> GetModels(int makeId, int year)
+        {
+            var models = await _vehicleService.GetModelsForMakeYearAsync(makeId, year);
+            List<VehicleModel>? modelsResponse = models.Results?.ToList();
+            return Ok(modelsResponse);
+        }
+
     }
 }
