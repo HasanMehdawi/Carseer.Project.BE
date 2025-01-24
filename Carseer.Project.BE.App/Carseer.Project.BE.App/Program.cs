@@ -17,20 +17,18 @@ builder.Services.AddCors(options =>
         builder
         .AllowAnyOrigin()
         .AllowAnyMethod()
-        .AllowAnyHeader()
-        .WithExposedHeaders(["X-Rate-Limit-Limit", "X-Rate-Limit-Remaining", "X-Rate-Limit-Reset", "Last-Modified", "X-Total-Count", "X-Result-Count"]);
+        .AllowAnyHeader();
     });
 });
 
 var app = builder.Build();
-
+app.UseCors();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

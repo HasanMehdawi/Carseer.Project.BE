@@ -18,7 +18,8 @@ namespace Carseer.Project.BE.App.Controllers
         public async Task<ActionResult> GetMakes()
         {
             var makes = await _integrationService.GetMakesAsync();
-            return Ok(makes);
+            List<Make>? makeResponses = makes.Results?.ToList();
+            return Ok(makeResponses);
         }
     }
 }
