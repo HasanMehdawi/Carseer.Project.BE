@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  carseer_be:
+    container_name: "carseer-be-service-app"
+    image: carseer-be-service-app-img
+    build:
+      context: ..
+      dockerfile: Carseer.Project.BE.App/Dockerfile
+    ports:
+      - "6999:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80

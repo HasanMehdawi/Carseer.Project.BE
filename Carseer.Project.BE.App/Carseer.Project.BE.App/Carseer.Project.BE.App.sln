@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carseer.Project.BE.App", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carseer.Project.BE.Domain", "..\Carseer.Project.BE.Domain\Carseer.Project.BE.Domain\Carseer.Project.BE.Domain.csproj", "{5C7DB890-6416-4A36-85B9-58AFD8F0139C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CCA4156B-ED34-4B37-AA2B-18665051A864}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
